@@ -38,6 +38,10 @@
       ansible.builtin.import_tasks: tasks/pi-hole.yml
       when: pihole_enable
 
+    - name: Set up Pi Hole exporter
+      ansible.builtin.import_tasks: tasks/pi-hole-exporter.yml
+      when: pihole_exporter_enable
+
     - name: Set up Shelly Plug Monitoring.
       ansible.builtin.import_tasks: tasks/shelly-plug.yml
       when: shelly_plug_enable

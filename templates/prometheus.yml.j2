@@ -47,6 +47,12 @@ scrape_configs:
       - targets: ['172.17.0.1:9817']
 {% endif %}
 
+{% if pihole_exporter_enable %}
+  - job_name: 'pihole'
+    static_configs:
+      - targets: ['172.17.0.1:9617']
+{% endif %}
+
   - job_name: 'ping'
     metrics_path: /probe
     scrape_interval: {{ monitoring_ping_interval }}

@@ -1,0 +1,18 @@
+# {{ ansible_managed }}
+---
+version: "3"
+
+services:
+  pihole-exporter:
+    container_name: pihole-exporter
+    image: ekofr/pihole-exporter:latest
+    ports:
+      - "9617:9617"
+    environment:
+      PIHOLE_HOSTNAME: '{{ pihole_exporter_hostname }}'
+      PIHOLE_API_TOKEN: '{{ pihole_exporter_api_password }}'
+      INTERVAL: '30s'
+      PORT: '9617'
+#    cap_add:
+#      - NET_ADMIN
+    restart: unless-stopped

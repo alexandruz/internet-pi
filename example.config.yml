@@ -18,6 +18,15 @@ monitoring_ping_hosts:  # [URL];[HUMAN_READABLE_NAME]
   - https://github.com/;github.com
   - https://www.apple.com/;apple.com
 
+# Pi-Hole monitoring. (Also requires `monitoring_enable`)
+pihole_exporter_enable: false
+pihole_exporter_hostname: "pihole-hostname-or-ip"
+# pihole_remote_password: "pihole-password"
+pihole_exporter_api_password: "pihole-api-key"
+# pihole_exporter_interval: "30s"
+# pihole_exporter_port: 9617
+# pihole_exporter_exposed_port: 9167
+
 # Shelly Plug configuration. (Also requires `monitoring_enable`)
 shelly_plug_enable: false
 shelly_plug_hostname: my-shelly-plug-host-or-ip

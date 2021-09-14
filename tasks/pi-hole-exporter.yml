@@ -1,0 +1,27 @@
+---
+- name: Create Pi-hole exporter folder on Pi.
+  ansible.builtin.file:
+    path: "{{ config_dir }}/pi-hole-exporter"
+    state: directory
+    mode: 0755
+  become: false
+
+- name: Copy Pi-hole exporter docker-compose template to Pi.
+  ansible.builtin.template:
+    src: templates/pi-hole-exporter-docker-compose.yml.j2
+    dest: "{{ config_dir }}/pi-hole-exporter/docker-compose.yml"
+    mode: '0640'
+  become: false
+
+- name: Ensure Pi-hole exporter is running.
+  community.docker.docker_compose:
+    project_src: "{{ config_dir }}/pi-hole-exporter/"
+    build: false
+  become: false
+
+- name: Copy pi-hole (exporter) dashboard config to grafana
+  ansible.builtin.copy:
+    src: files/pihole-monitoring-dashboard.json
+    dest: "{{ config_dir }}/internet-monitoring/grafana/provisioning/dashboards/"
+    mode: 0644
+  become: false
